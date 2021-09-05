@@ -1,0 +1,26 @@
+{
+    "user1": {
+        "username": "user1",
+        "password": "password",
+        "code": "user12",
+        "created": "2021-09-04 19-00-15"
+    },
+    "user2": {
+        "username": "user2",
+        "password": "password2",
+        "code": "user21",
+        "created": "2020-07-07 00:28:07.315781"
+    },
+    "ashwin": {
+        "username": "ashwin",
+        "password": "csgo12345",
+        "code": "user123",
+        "created": "2021-09-05 07-54-23"
+    },
+    "user156": {
+        "username": "user156",
+        "password": "csgo12345",
+        "code": "user1234",
+        "created": "2021-09-05 12-33-49"
+    }
+}

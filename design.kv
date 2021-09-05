@@ -1,0 +1,192 @@
+<Screen>:
+    on_leave: app.previous_screen = self.name
+<LoginScreen>:
+    GridLayout:
+        cols: 1       
+        GridLayout:
+            cols: 1
+            padding: 15,15
+            spacing: 20,20
+            Label:
+                text: "User Login"
+                font_size: '20sp'
+            TextInput:
+                id: lusername
+                hint_text: "Username"
+                focus: True
+                multiline: False
+                on_text_validate: lpassword.focus = True
+            TextInput:
+                id: lpassword
+                password: True
+                hint_text: "Password"
+                multiline: False
+            RelativeLayout:
+                Button:
+                    id: lb
+                    text: "Login"
+                    on_press: root.login(root.ids.lusername.text,root.ids.lpassword.text)
+                    size_hint: 0.3,0.5
+                    pos_hint: {'center_x':0.5, 'center_y':0.6}
+            Label:
+                id: login_wrong
+                text: ""
+
+
+        GridLayout:
+            cols: 2
+            size_hint: 0.2,0.2
+            padding: 10, 10
+            spacing: 10, 0
+            Button: 
+                text: "Forgot Password"
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1, 0.7,1,1
+
+                on_press: root.forgot_password()
+            Button:
+                text: "Sign Up"
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1, 0.7,1,1
+
+                on_press: root.sign_up()
+
+<SignUpScreen>:
+    GridLayout:
+        cols: 1
+        padding: 20, 20
+        spacing: 20, 20
+        Label:
+            text: "Sign up for a space journey!"
+            font_size: '20sp'
+        TextInput:
+            id: username
+            hint_text: "Enter a username"
+            focus: True
+            multiline: False
+            on_text_validate: password.focus = True 
+        TextInput:
+            id: password
+            hint_text: "Enter a password"
+            focus: True
+            multiline: False
+            on_text_validate: code.focus = True
+            
+        TextInput:
+            id: code
+            hint_text: "Enter a secret code: use only a-z and 0-9"
+            multiline: False
+        RelativeLayout:
+            Button:
+                text: "Submit"
+                on_press: root.add_user(root.ids.username.text, root.ids.password.text,root.ids.code.text)
+                size_hint: 0.3,0.5
+                pos_hint: {'center_x':0.5, 'center_y':0.6}
+        Label:
+            id: empty_signup
+            text: ""
+        Button:
+            text: "Existing user? login"
+            background_color: 1,1,1,0
+            opacity: 1 if self.state == 'normal' else 0.5
+            color: 0.1, 0.7,1,1
+
+            on_press: root.sign_in()
+
+<SignUpScreenSuccess>:
+    GridLayout:
+        cols: 1
+        padding: 20, 20
+        spacing: 20, 20
+        Label: 
+            text: "Sign up successful"
+            font_size: '20sp'
+        RelativeLayout:
+            Button:
+                text: "Click here to login"
+                font_size: '20sp'
+                on_press: root.go_to_login()
+
+<ForgotPassword>:
+    GridLayout:
+        cols: 1       
+        GridLayout:
+            cols: 1
+            padding: 15,15
+            spacing: 20,20
+            RelativeLayout:
+                Button:
+                    text: "Back"
+                    on_release: root.manager.current = app.previous_screen
+                    size_hint: 0.2,0.5
+                    pos_hint: {"center_x":0.88, "center_y":0.8}
+            Label:
+                text: "Forgot Password"
+                font_size: '20sp'
+            TextInput:
+                id: fusername
+                focus: True
+                hint_text: "Username"
+                multiline: False
+                on_text_validate: fcode.focus = True
+            TextInput:
+                id: fcode
+                hint_text: "Secrect code"
+                multiline: False
+            RelativeLayout:
+                Button:
+                    text: "Find"
+                    on_press: root.get_pwd(root.ids.fusername.text,root.ids.fcode.text)
+                    size_hint: 0.3,0.5
+                    pos_hint: {'center_x':0.5, 'center_y':0.6}
+            Label:
+                id: f_text
+                text: ""
+
+<LoginScreenSuccess>:
+    GridLayout:
+        cols: 1
+        padding: 30, 30
+        spacing: 30,30
+        RelativeLayout:
+            ImageButton:
+                on_press: root.log_out() 
+                source: 'logout_hover.png' if self.hovered else "logout_nothover.png"
+                size_hint: 0.35,0.35
+                pos_hint: {"center_x":0.93, "center_y":0.8}
+
+        Label:
+            text: root.ask_question()
+            font_size: "20sp"
+        TextInput:
+            id: feeling
+            hint_text: "Things to try: happy, sad, unloved..."
+            multiline: False
+        Button:
+            text: "Enlighten me"
+            on_press: root.get_quote(root.ids.feeling.text)
+        ScrollView:
+            Label:
+                id: quote
+                text: ""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+               
+
+
+
+<RootWidget>:
+    LoginScreen:
+        name: "login_screen"
+    SignUpScreen:
+        name: "sign_up_screen"
+    SignUpScreenSuccess:
+        name: "sign_up_screen_success"
+    LoginScreenSuccess:
+        name: "login_screen_success"
+    ForgotPassword:
+        name: "forgot_password"
+
