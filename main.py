@@ -2,7 +2,6 @@ __version__ = "1.10.1"
 
 # import necessary
 
-from os import uname
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.relativelayout import RelativeLayout
@@ -15,12 +14,13 @@ from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 
 
-
 # connecting the kv file to main.py
 Builder.load_file('design.kv')
 
-# empty class 
 class LoginScreen(Screen):
+    def app_title(self):
+        text = "Gezellig"
+        return text
     def sign_up(self):
         self.manager.current = "sign_up_screen"
     
@@ -80,11 +80,11 @@ class LoginScreenSuccess(Screen):
     def ask_question(self):
         text = "How do you feel?"
         return text
-   
     def log_out(self):
         self.manager.transition.direction = "right"
         self.manager.current = "login_screen"
         self.ids.feeling.text = ""
+        self.ids.quote.text = ""
     
     def get_quote(self,feel):
         feel = feel.lower()
@@ -120,6 +120,7 @@ class MainApp(App):
     def __init__(self,*args, **kwargs):
         super(MainApp, self).__init__(**kwargs)
         self.previous_screen = "" 
+
     def build(self):
         return RootWidget()
 

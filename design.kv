@@ -1,5 +1,6 @@
 <Screen>:
     on_leave: app.previous_screen = self.name
+
 <LoginScreen>:
     GridLayout:
         cols: 1       
@@ -7,6 +8,9 @@
             cols: 1
             padding: 15,15
             spacing: 20,20
+            Label:
+                text: root.app_title()
+                font_size: '40sp'
             Label:
                 text: "User Login"
                 font_size: '20sp'
